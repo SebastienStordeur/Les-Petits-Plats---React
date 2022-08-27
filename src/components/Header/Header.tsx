@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import Logo from "../../assets/logo.png";
 import Input from "../UI/Input";
+import { RecipeContext } from "../../store/recipesContext";
 
 const Header: React.FC = () => {
-  const searchInputHandler = (
-    event: React.FormEvent<HTMLInputElement>
-  ): void => {};
+  const recipeCtx = useContext(RecipeContext);
+
   return (
     <header id="header" className="header">
       <img src={Logo} alt="Les petits plats" className="logo" />
@@ -15,7 +15,7 @@ const Header: React.FC = () => {
         name="search"
         placeholder="Rechercher une recette"
         value=""
-        onChange={searchInputHandler}
+        onChange={recipeCtx.handleSearchValue}
       />
     </header>
   );

@@ -9,7 +9,7 @@ interface Ingredient {
   unit?: string | undefined;
 }
 
-interface RecipeI {
+export interface RecipeI {
   id: number;
   name: string;
   time: number;
