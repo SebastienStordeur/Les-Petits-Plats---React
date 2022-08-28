@@ -35,7 +35,6 @@ const Recipe: React.FC<RecipeI> = (props) => {
           <div className="ingredients-infos">
             <ul>
               {props.ingredients.map((ingredient: Ingredient) => {
-                console.log(ingredient);
                 return (
                   (!ingredient.unit && !ingredient.quantity && (
                     <li className="ingredient" key={Math.random().toString()}>

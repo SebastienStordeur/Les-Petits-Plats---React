@@ -6,7 +6,6 @@ import { RecipeContext } from "../../store/recipesContext";
 
 const Header: React.FC = () => {
   const recipeCtx = useContext(RecipeContext);
-
   return (
     <header id="header" className="header">
       <img src={Logo} alt="Les petits plats" className="logo" />
@@ -14,7 +13,7 @@ const Header: React.FC = () => {
         className="search-input"
         name="search"
         placeholder="Rechercher une recette"
-        value=""
+        value={recipeCtx.searchValue}
         onChange={recipeCtx.handleSearchValue}
       />
     </header>

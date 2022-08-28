@@ -6,8 +6,6 @@ type RecipeContextProviderProps = {
   children: React.ReactNode;
 };
 
-//  Types of property 'handleSearchValue' are incompatible.
-//Type '(event: React.ChangeEvent<HTMLInputElement>) => void' is not assignable to type '() => void'.
 interface RecipeContextInterface {
   recipes: RecipeI[];
   filteredRecipes: RecipeI[];
@@ -19,7 +17,7 @@ interface RecipeContextInterface {
 export const RecipeContext = React.createContext<RecipeContextInterface>({
   recipes: data.recipes,
   filteredRecipes: data.recipes,
-  searchValue: "",
+  searchValue: "value",
   handleSearchValue: () => {},
   filterRecipes: () => {},
 });
@@ -32,25 +30,32 @@ export const RecipeContextProvider = ({
 
   const handleSearchValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
+    console.log("value", event.target.value);
+    filterRecipes();
   };
 
   const filterRecipes = () => {
+    if (searchValue.length < 3) {
+      setFilteredRecipes(data.recipes);
+    }
     if (searchValue.length >= 3) {
+      console.log(searchValue);
       setFilteredRecipes(
-        filteredRecipes.filter(
-          (recipes) =>
-            recipes.name.includes(searchValue) ||
-            recipes.description.includes(searchValue)
+        data.recipes.filter((recipe) =>
+          recipe.name.toLowerCase().includes(searchValue.toLowerCase())
         )
       );
+      console.log(searchValue);
     }
-    return filterRecipes;
+
+    console.log(filteredRecipes);
+    return filteredRecipes;
   };
 
   const defaultValue = {
     recipes: data.recipes,
     filteredRecipes: filteredRecipes,
-    searchValue: "",
+    searchValue: searchValue,
     handleSearchValue: handleSearchValue,
     filterRecipes: filterRecipes,
   };
